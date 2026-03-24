@@ -43,8 +43,12 @@ https://link.springer.com/article/10.1007/s10586-024-04355-0
 | Response Time (ms/sample) | 0.0005 |
 
 **Confusion Matrix:**
-[[45296 163]
-[ 246 10910]]
+### Confusion Matrix
+
+|                | Predicted BENIGN | Predicted ATTACK |
+|----------------|------------------|------------------|
+| **Actual BENIGN** | 45296 | 163 |
+| **Actual ATTACK** | 246 | 10910 |
 
 
 ---
