@@ -102,3 +102,85 @@ https://link.springer.com/article/10.1007/s10586-024-04355-0
 - Stage 1 (Decision Tree) acts as a fast filter for benign traffic.
 - Stage 2 (FT-Transformer) performs deeper classification on suspicious samples.
 - The pipeline achieves **low false positive rate (0.19%)** with strong detection performance.
+
+
+## Detailed Benchmark Results For Tactic 13 (ViT)
+
+### Dataset Distribution
+
+| Label | Count |
+|------|------:|
+| BENIGN | 2,273,097 |
+| DoS Hulk | 231,073 |
+| PortScan | 158,930 |
+| DDoS | 128,027 |
+| DoS GoldenEye | 10,293 |
+| FTP-Patator | 7,938 |
+| SSH-Patator | 5,897 |
+| DoS slowloris | 5,796 |
+| DoS Slowhttptest | 5,499 |
+| Bot | 1,966 |
+| Web Attack – Brute Force | 1,507 |
+| Web Attack – XSS | 652 |
+| Infiltration | 36 |
+| Web Attack – SQL Injection | 21 |
+| Heartbleed | 11 |
+
+**Number of Classes:** 15  
+**Feature Count:** 78  
+**Input Shape:** (1, 10, 10)  
+**Device:** CUDA  
+**Model Parameters:** 312,335  
+
+---
+
+### Training Summary
+
+| Epoch | Loss | Train Accuracy |
+|------:|------:|--------------:|
+| 1 | 0.4251 | 0.8998 |
+| 5 | 0.0829 | 0.9677 |
+| 10 | 0.0612 | 0.9736 |
+| 15 | 0.0544 | 0.9763 |
+
+---
+
+### Per-Class Performance
+
+| Class | Detection Rate | False Positive Rate |
+|------|---------------:|--------------------:|
+| BENIGN | 0.9780 | 0.0271 |
+| Bot | 0.3846 | 0.0000 |
+| DDoS | 0.9860 | 0.0002 |
+| DoS GoldenEye | 0.9756 | 0.0001 |
+| DoS Hulk | 0.9857 | 0.0090 |
+| DoS Slowhttptest | 0.9810 | 0.0003 |
+| DoS slowloris | 0.9655 | 0.0001 |
+| FTP-Patator | 0.9879 | 0.0010 |
+| Heartbleed | 0.0000 | 0.0000 |
+| Infiltration | 0.0000 | 0.0000 |
+| PortScan | 0.9573 | 0.0078 |
+| SSH-Patator | 0.9649 | 0.0007 |
+| Web Attack – Brute Force | 0.0000 | 0.0000 |
+| Web Attack – SQL Injection | 0.0000 | 0.0000 |
+| Web Attack – XSS | 0.0000 | 0.0000 |
+
+---
+
+### Overall Performance
+
+| Metric | Value |
+|--------|------:|
+| Accuracy | 0.9767 |
+| Macro Detection Rate | 0.6111 |
+| Macro False Positive Rate | 0.0031 |
+
+---
+
+### Notes
+
+- Strong overall accuracy but **low macro detection rate**, indicating poor performance on rare classes.
+- Several minority classes (e.g., Heartbleed, Infiltration, Web Attacks) were not detected.
+- Likely affected by **severe class imbalance** in the dataset.
+
+
